@@ -1,0 +1,24 @@
+name: 'Serch and replace'
+description: 'Search and replace in string or file'
+inputs:
+  search-value:
+    description: 'The value that will be replaced by the new value'
+    required: true
+  new-value:
+    description: 'The value to replace the search value with'
+    required: true
+  subject:
+    descriptio: 'The string to be searched and replaced. If omitted subject-paht is required. If both subject and subject-path are provided, subject takes precedence.'
+    required: false
+  subject-path:
+    description: 'The text file path which content we wanto to be searcehd and replaced. If omitted subject is required. If both subject and subject-path are provided, subject takes precedence.'
+    required: false
+outputs:
+  new-subject:
+    description: 'If subject-path is provided, the path of searched and replaced file, otherwise the subject with search-value replaced by new-value.'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  icon: 'repeat'
+  color: 'gray-dark'

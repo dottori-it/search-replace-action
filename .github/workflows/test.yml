@@ -1,0 +1,37 @@
+name: "Test"
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Run unit test
+      run: |
+        npm ci
+        npm test
+  test-local:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macOS-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Prepare test files
+      run: |
+        echo 'test \n asd*\wdsa text' > subject
+        echo 'test \n replaced text' > shouldbe
+    - uses: ./
+      with:
+        subject-path: ./subject
+        search-value: asd*\wdsa
+        new-value: replaced
+    - name: Test result
+      run: cmp --silent ./subject ./shouldbe
