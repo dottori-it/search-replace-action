@@ -82,7 +82,7 @@ function run() {
 
     const searchValue = core.getInput('search-value', { required: true });
     core.debug(`search value [${searchValue}]`);
-    const newValue = core.getInput('new-value', { required: true });
+    const newValue = core.getInput('new-value') || '';
     core.debug(`new value [${newValue}]`);
 
     const subjectPath = core.getInput('subject-path');
