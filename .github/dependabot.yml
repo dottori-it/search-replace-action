@@ -1,0 +1,16 @@
+version: 2
+registries:
+  npm-registry-npm-pkg-github-com-dottori-it:
+    type: npm-registry
+    url: https://npm.pkg.github.com/dottori-it
+    token: "${{secrets.NPM_REGISTRY_NPM_PKG_GITHUB_COM_DOTTORI_IT_TOKEN}}"
+
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  registries:
+  - npm-registry-npm-pkg-github-com-dottori-it
